@@ -30,6 +30,11 @@ class Webhooker {
 		curl_setopt($ch, CURLOPT_POST, 1);
 
 		$response = curl_exec($ch);
+
+		if ($response === false) {
+			throw new Exception('cURL error: ' . curl_error($ch));
+		}
+		
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 		curl_close($ch);

@@ -23,15 +23,30 @@ $data = [
     'email' => 'john.doe@example.com'
 ];
 
-// Send the data to Zapier and get the response
-$response = Webhooker::send($webhookUrl, $data);
+try {
 
-// Check if the request was successful
-if ($response['success']) {
-    echo 'Data sent to Zapier successfully.';
-} else {
-    echo 'Failed to send data to Zapier. HTTP Code: ' . $response['http_code'];
+    // Send the data to Zapier and get the response
+    $response = Webhooker::send($webhookUrl, $data);
+
+    // Check if the request was successful
+    if ($response['success']) {
+        echo 'Data sent to Zapier successfully.';
+    } else {
+        echo 'Failed to send data to Zapier. HTTP Code: ' . $response['http_code'];
+    }
+
+} catch (InvalidArgumentException $e) {
+
+    // Handle InvalidArgumentException here
+    echo "An InvalidArgumentException was thrown: " . $e->getMessage();
+
+} catch (Exception $e) {
+    
+    // Handle general exceptions here
+    echo "An Exception was thrown: " . $e->getMessage();
+
 }
+
 ```
 
 In this example, replace `'https://hooks.zapier.com/hooks/catch/1234567/abcdefg/'` with your actual Zapier webhook URL and `$data` with the actual data you want to send to Zapier.

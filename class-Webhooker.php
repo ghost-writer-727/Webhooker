@@ -40,7 +40,7 @@ class Webhooker {
 		curl_close($ch);
 
 		return [
-			'success' => $httpCode == 200,
+			'success' => $httpCode >= 200 && $httpCode < 300,
 			'response' => $response,
 			'http_code' => $httpCode
 		];

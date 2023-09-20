@@ -8,8 +8,27 @@ To use this class, you need to include it in your PHP project. You can do this b
 
 ## Usage
 
-The `Webhooker` class has a static method `send` that you can use to send data to a webhook URL. Here's how you can use it:
+The `Webhooker` class has a static method `send` that you can use to send data to a webhook URL.
 
+Simple Usage Example:
+```php
+// Include the Webhooker class file
+require_once('Webhooker.php');
+
+// Your Zapier webhook URL
+$webhookUrl = 'https://hooks.zapier.com/hooks/catch/1234567/abcdefg/';
+
+// The data you want to send to Zapier
+$data = [
+    'name' => 'John Doe',
+    'email' => 'john.doe@example.com'
+];
+
+// Send the data to Zapier and get the response
+$response = Webhooker::send($webhookUrl, $data);
+```
+
+Usage example with Try/Catch for errors:
 ```php
 // Include the Webhooker class file
 require_once('Webhooker.php');

@@ -1,4 +1,7 @@
-<?php defined( 'ABSPATH' ) ||  exit; // Exit if accessed directly
+<?php 
+namespace WoocommerceWebhooks;
+
+defined( 'ABSPATH' ) ||  exit; // Exit if accessed directly
 /** 
  * Webhooker
  * @version 1.0.0
@@ -17,17 +20,17 @@ class Webhooker {
 	public static function send($webhookUrl, $data = [], $timeout = 10) {
 		// Validate the webhook URL
         if (!filter_var($webhookUrl, FILTER_VALIDATE_URL)) {
-            throw new InvalidArgumentException('Invalid webhook URL.');
+            throw new \InvalidArgumentException('Invalid webhook URL.');
         }
 
         // Validate the data
         if (!is_array($data) && !is_string($data)) {
-            throw new InvalidArgumentException('Data must be an array or a string.');
+            throw new \InvalidArgumentException('Data must be an array or a string.');
         }
 
 		// Validate that timeout is an integer
 		if (!is_int($timeout)) {
-			throw new InvalidArgumentException('Timeout must be an integer.');
+			throw new \InvalidArgumentException('Timeout must be an integer.');
 		}
 
 		$ch = curl_init($webhookUrl);
@@ -42,7 +45,7 @@ class Webhooker {
 		$response = curl_exec($ch);
 
 		if ($response === false) {
-			throw new Exception('cURL error: ' . curl_error($ch));
+			throw new \Exception('cURL error: ' . curl_error($ch));
 		}
 		
 		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);

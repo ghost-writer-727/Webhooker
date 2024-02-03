@@ -1,5 +1,5 @@
 <?php 
-namespace WoocommerceWebhooks;
+namespace TaxJarExpansion;
 
 defined( 'ABSPATH' ) ||  exit; // Exit if accessed directly
 /** 
@@ -37,6 +37,8 @@ class Webhooker {
 		$timeout = 10; // Seconds
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+		// DEV: We're using http_build_query($data) and setting the Content-Type header to 'application/x-www-form-urlencoded'. This is appropriate for many webhook providers, but some might require JSON. Consider either detecting the required format from the $webhookUrl or adding a parameter to specify the content type.
+
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
